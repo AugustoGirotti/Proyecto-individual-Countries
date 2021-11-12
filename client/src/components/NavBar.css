@@ -1,0 +1,12 @@
+.link{
+    text-decoration: none;
+}
+
+.span{
+    display: flex;
+    align-items: flex-end;
+    background-color: rgb(133, 228, 177);
+    color: blue;
+    font-weight: bolder;
+
+}
