@@ -1,22 +1,4 @@
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 const server = require('./src/app.js');
 const { conn, Country } = require('./src/db.js');
 const axios = require('axios')
@@ -34,7 +16,7 @@ async function copyCountries(){
       let array = []
       for (let i = 0; i < countries.data.length; i++){
           array.push({
-              name: countries.data[i].name.official,
+              name: countries.data[i].name.common,
               id: countries.data[i].cca3,
               image:countries.data[i].flags[0],
               continent:countries.data[i].region,
