@@ -6,10 +6,10 @@ import { NavBar } from './components/NavBar';
 import { Route, Routes } from 'react-router-dom';
 import { SearchBar } from './components/SearchBar';
 import { Countries } from './components/Countries';
+import Pagination from './components/Pagination';
+
 function App() {
   const [countries, setCountries] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [postPerPage, setPostPerPage] = useState(10)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
+        <Route path='/' element={<Pagination/>}/>
         <Route path='/countries' element={<Countries countries={countries} loading={loading} />} />
       </Routes>
     </div>
