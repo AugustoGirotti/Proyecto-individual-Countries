@@ -9,6 +9,7 @@ export function SearchBar({onSearch}){
         .then(response => setCountry(response.data))
     }
     return (
-        <input value={country} onClick={(e)=>onSearch(e.target.value)}></input>
+        <input value={country} placeholder={'Search country...'} 
+        onClick={(e)=>onSearch(e.target.value)}></input>
     )
 }
