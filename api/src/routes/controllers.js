@@ -66,8 +66,9 @@ async function getCountries(req, res){
                     ['name', 'ASC']
                 ],
                 attributes:[
-                    'name', 'id', 'image', 'continent', 'subregion', 'area', 'population'
-                ]
+                    'name', 'id', 'image', 'continent', 'subregion', 'area', 'population', 'capital'
+                ],
+                include: Activity
             })
             return res.json(paises)
         } catch(e){
@@ -80,7 +81,8 @@ async function getCountries(req, res){
                     name: {
                         [Op.iLike]: `%${name}%`
                     }
-                }
+                },
+                include: Activity
             })
             if (country === null){
                 return res.json({message: 'Country not found'})
@@ -93,27 +95,7 @@ async function getCountries(req, res){
 }
 
 
-// async function getCountryByQuery(req, res){
-//     console.log(req.query)
-//     if (req.query && req.query.name){
-//         const {name} = req.query
-//         try {
-//             const country = await Country.findOne({
-//                 where:{
-//                     name: {
-//                         [Op.iLike]: `%${name}%`
-//                     }
-//                 }
-//             })
-//             res.json(country)
-//         }catch(e){
-//             console.log(e)
-//         }
-//     }
-//     else if (Object.keys(req.query).length > 0){
-//         res.json({message: 'You must send the property name by query'})
-//     }
-// }
+
 
 async function getCountryById(req, res){
     let {id} = req.params
