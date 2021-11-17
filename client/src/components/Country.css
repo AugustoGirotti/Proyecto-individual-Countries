@@ -1,11 +1,13 @@
 .country{
     border: 1px;
     background-color: gray;
-    width: 500px;
+    width: 200px;
     font-size: small;
     font-weight: bolder;
     color: black;
     margin-top: 10px;
+    height: 400px;
+    
 }
 
 .img{

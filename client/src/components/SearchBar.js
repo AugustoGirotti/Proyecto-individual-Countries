@@ -1,15 +1,29 @@
-import { useState } from "react"
-import axios from "axios"
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getCountryByName } from "../actions";
 
-export function SearchBar({onSearch}){
-    const [country, setCountry] = useState([])
-    
-    async function onSearch(country){
-        await axios.get(`http://localhost:3001/countries?name=${country}`)
-        .then(response => setCountry(response.data))
+export default function SearchBar(){
+    const dispatch = useDispatch()
+    const [name, setName] = useState('')
+
+    function handleInputChange(e){
+        setName(e.target.value)
+    }
+
+    function handleSubmit(e){
+        e.preventDefault()
+        dispatch(getCountryByName(name))
+        setName('')
     }
     return (
-        <input value={country} placeholder={'Search country...'} 
-        onClick={(e)=>onSearch(e.target.value)}></input>
+        <div>
+            <input
+            type='text'
+            placeholder='Search country...'
+            onChange={handleInputChange}
+            value={name}
+            />
+            <button disabled={name ? false : true} onClick={handleSubmit} type='submit'>Search</button>
+        </div>
     )
 }

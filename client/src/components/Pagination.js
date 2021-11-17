@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Country } from "./Country";
 import './Pagination.css'
-
+import { useDispatch, useSelector } from "react-redux";
+import { getCountries } from "../actions";
 const renderData = data => {
     return(
         <ul className='countries'>
-            {data.map((country, index)=>{
+            {data && data.map((country, index)=>{
                 // return <li key={index} >{country.name}</li>
                 return <Country 
                     key={index}
@@ -24,8 +25,8 @@ const renderData = data => {
     )
 }
 
-export default function Pagination(){
-    const [data, setData] = useState([]);
+export default function Pagination({countries}){
+    // const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setitemsPerPage] = useState(10);
 
@@ -34,7 +35,13 @@ export default function Pagination(){
     const [minPageNumberLimit, setMinPageNumberLimit] = useState(0)
     //defino la cantidad de paginas que voy a necesitar dividiendo el largo del arreglo de paises
     //por la cantidad de paises por pagina
+    const data = countries
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [countries])
+    
     const handleClick = (event)=>{
         setCurrentPage(Number(event.target.id))
     }
@@ -64,11 +71,12 @@ export default function Pagination(){
         } else return null;
     })
 
-    useEffect(()=>{
-        axios.get('http://localhost:3001/countries')
-        .then(r => setData(r.data))
-    },[])
-    console.log(data)
+    // useEffect(()=>{
+    //     axios.get('http://localhost:3001/countries')
+    //     .then(r => setData(r.data))
+    // },[])
+    // console.log(data)
+
 
     const handleNextButton = () => {
         setCurrentPage(currentPage + 1)
@@ -89,7 +97,6 @@ export default function Pagination(){
 
     return(
         <div>
-            <h1>Countries-Pagination</h1>
             {renderData(currentItems)}
             <ul className='pageNumbers'>
                 <li>
