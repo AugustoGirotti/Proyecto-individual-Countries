@@ -2,7 +2,7 @@
 
 const initialState = {
     countries: [],
-    allCountries:[]
+    allCountries:[],
 };
 
 export default function rootReducer(state = initialState, action){
@@ -72,6 +72,18 @@ export default function rootReducer(state = initialState, action){
             return {
                 ...state,
                 countries: action.payload
+            }
+        case 'FILTER_BY_ACTIVITY':
+            if (action.payload === 'empty') return {...state}
+            const countriesByActivity = state.allCountries.filter(c => {
+                for (let i = 0; i < c.activities.length; i++){
+                    if (c.activities[i].name === action.payload) return true
+                }
+                return false
+            })
+            return {
+                ...state,
+                countries: countriesByActivity
             }
         default:
             return state;

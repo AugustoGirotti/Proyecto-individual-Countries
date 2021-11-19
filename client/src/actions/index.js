@@ -45,3 +45,12 @@ export function getCountryByName(name){
     }
 }
 
+
+export function filterByActivity(activity){
+    console.log(activity)
+    return {
+        type: 'FILTER_BY_ACTIVITY',
+        payload: activity
+    }
+}
+

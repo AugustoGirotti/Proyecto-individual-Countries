@@ -1,4 +1,4 @@
-import { filterByContinent, getCountries, orderByAlph, orderByPop } from "../actions";
+import { filterByActivity, filterByContinent, getCountries, orderByAlph, orderByPop } from "../actions";
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux'
@@ -6,14 +6,19 @@ import { Link } from "react-router-dom";
 import { Country } from "./Country";
 import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
+import { NavBar } from "./NavBar";
 
 
 export default function Home(){
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries)
+    const allCountries = useSelector(state => state.allCountries)
+    // const activities = useSelector(state => state.activities)
+
     useEffect(()=>{
         dispatch(getCountries())
     }, [])
+
 
     const [order, setOrder] = useState('')
 
@@ -34,8 +39,14 @@ export default function Home(){
     function handleGetAllCountries(){
         dispatch(getCountries())
     }
+
+    function handleFilterByActivity(e){
+        dispatch(filterByActivity(e.target.value))
+    }
+
     return (
         <>
+        <NavBar />
         <Link to='/activity'>
             <button>Create activity</button>
         </Link>
@@ -59,10 +70,19 @@ export default function Home(){
             <option value='americas'>America</option>
             <option value='antarctic'>Antarctic</option>
         </select>
+        <select onChange={handleFilterByActivity}>
+            <option value='empty'>-FilterByActivity-</option>
+            {
+                allCountries.map(c => (
+                    c.activities.map(a => (
+                        <option value={a.name}>{a.name}</option>
+                    ))
+                ))
+            }
+        </select>
         <SearchBar />
-        {/* <input placeholder='Filter by activity...' name='filterByActivity' type='submit' /> */}
-            <h1>Countries</h1>
-            <Pagination countries={countries}/>
+        <h1>Countries</h1>
+        <Pagination countries={countries}/>
         </>
     )
 

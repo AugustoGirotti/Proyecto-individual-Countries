@@ -2,14 +2,23 @@ import React, { useState } from "react";
 import './CreateActivity.css'
 import axios from 'axios'
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { NavBar } from "./NavBar";
+
+
 export default function CreateActivity(){
     const [input, setInput] = useState({
         name: '',
         difficulty: '',
         duration: '',
         season: '',
-        country:''
+        country:[]
     })
+
+
+
+    const allCountries = useSelector(state => state.allCountries)
 
     const [errors, setErrors] = useState({})
 
@@ -58,20 +67,41 @@ export default function CreateActivity(){
         setErrors(errors)
     }
 
+    function handleSelect(e){
+        if (!input.country.includes(e.target.value)){
+            setInput({
+                ...input,
+                country: [...input.country, e.target.value]
+            })
+        }
+    }
+
+    function deleteCountry(e){
+        e.preventDefault()
+        const newCountries = input.country.filter(c => c !== e.target.value)
+        setInput({
+            ...input,
+            country: newCountries
+        })
+    }
+
     async function handleSubmit(e){
         e.preventDefault()
-        console.log('entro')
-        var response = await axios.post('http://localhost:3001/activity', input)
-        console.log(response)
+        for (let i = 0; i< input.country.length; i++){
+            var response = await axios.post('http://localhost:3001/activity', {...input, country: input.country[i]})
+            alert(response.data)
+        }
         setInput({
             name: '',
             difficulty: '',
             duration: '',
             season: '',
-            country:''
+            country:[]
         })
     }
     return (
+        <>
+        <NavBar />
         <form>
             <div>
                 <Link to='/home'>
@@ -122,20 +152,28 @@ export default function CreateActivity(){
                     errors.season && (<p className='danger'>{errors.season}</p>)
                 }
             </div>
-            <div>
-                <label>Country:</label>
-                <input name='country'
-                value={input.country}
-                onChange={handleInputChange}
-                className={errors.country && 'danger'}
-                />
+            <p>Select countries:</p>
+            <select onChange={handleSelect}>
                 {
-                    errors.country && (<p className='danger'>{errors.country}</p>)
+                    allCountries.map(c => (
+                        <option value={c.name} key={c.id}>{c.name}</option>
+                    ))
                 }
-            </div>
+            </select>
+                {
+                    input.country.map((c,i) => {
+                        return (
+                            <div key={i}>
+                                <button value={c} onClick={deleteCountry}>X</button>
+                                <p key={c}>{c}</p>
+                            </div>
+                        )
+                    })
+                }
             <button 
             onClick={(e) => handleSubmit(e)} 
             disabled={(errors.name || errors.difficulty || errors.duration || errors.season || errors.country || !input.name) ? true : false}>Submit</button>
         </form>
+        </>
     )
 }

@@ -37,6 +37,7 @@ function App() {
         {/* <Route path='/countries' render={() => <Countries countries={countries} loading={loading} />} /> */}
         <Route path='/countries/:id' component={CountryDetail} />
         <Route path='/activity' component={CreateActivity} />
+        <Route path='/navbar' component={NavBar} />
       </Switch>
     </div>
 
