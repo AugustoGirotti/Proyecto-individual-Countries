@@ -1,15 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Country } from "./Country";
-import './Pagination.css'
+import { Country } from "../Country/Country";
+import style from './Pagination.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../actions";
+import { getCountries } from "../../actions";
+
 const renderData = data => {
     return(
-        <ul className='countries'>
-            {data && data.map((country, index)=>{
-                // return <li key={index} >{country.name}</li>
-                return <Country 
+        <ul className={style.countries}>
+            {data === undefined || data.length === 0 ? <p>Country not found</p> :
+                data.map((country, index)=>{
+                    // return <li key={index} >{country.name}</li>
+                    return <Country 
                     key={index}
                     name={country.name}
                     id={country.id}
@@ -19,8 +21,9 @@ const renderData = data => {
                     subregion={country.subregion}
                     area={country.area}
                     population={country.population}
-                />
-            })}
+                    />
+                })  
+            }
         </ul>
     )
 }
@@ -40,6 +43,8 @@ export default function Pagination({countries}){
 
     useEffect(() => {
         setCurrentPage(1)
+        setMaxPageNumberLimit(5)
+        setMinPageNumberLimit(0)
     }, [countries])
     
     const handleClick = (event)=>{
@@ -63,7 +68,7 @@ export default function Pagination({countries}){
                 key={number} 
                 id={number} 
                 onClick={handleClick} 
-                className={currentPage == number ? 'active' : null}
+                className={currentPage == number ? style.active : null}
                 >
                     {number}
                 </li>
@@ -96,9 +101,9 @@ export default function Pagination({countries}){
 
 
     return(
-        <div>
+        <div className={style.container}>
             {renderData(currentItems)}
-            <ul className='pageNumbers'>
+            <ul className={style.pageNumbers}>
                 <li>
                     <button 
                     onClick={handlePrevButton}

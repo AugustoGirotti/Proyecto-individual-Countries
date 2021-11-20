@@ -1,4 +1,4 @@
-import { Country } from "./Country"
+import { Country } from "../Country/Country"
 import './Countries.css'
 
 export function Countries({countries, loading}){

@@ -1,6 +1,18 @@
+.container{
+    width: 100%;
+    max-width: 1200px;
+    height: 430px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
 .pageNumbers{
     list-style: none;
-    display: flex;
+    display:flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .pageNumbers li{
@@ -28,5 +40,11 @@
 .pageNumbers li button:hover{
     background-color: black;
     color: white;
+}
+
+.countries{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
 }
 

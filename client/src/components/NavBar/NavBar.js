@@ -1,12 +1,11 @@
 import React from "react";
-import Logo from '../img/planeta.png'
 import { Link } from "react-router-dom";
-import './NavBar.css'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import { useState } from "react";
-import { SideBarData } from "./SidebarData";
+import { SideBarData } from "../SidebarData";
 import './NavBar.css'
+import SearchBar from "../SearchBar/SearchBar";
 
 export function NavBar(){
     const [sidebar, setSidebar] = useState(false)
@@ -22,6 +21,8 @@ export function NavBar(){
                 <Link to='#' className='menu-bars'>
                     <FaIcons.FaBars onClick={showSidebar}/>
                 </Link>
+                <h1>Countries</h1>
+                <SearchBar/>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className='nav-menu-items' onClick={showSidebar}>

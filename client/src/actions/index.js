@@ -54,3 +54,16 @@ export function filterByActivity(activity){
     }
 }
 
+export function countryDetail(id){
+    return async function(dispatch){
+        try {
+            var json = await axios(`http://localhost:3001/countries/${id}`)
+            return dispatch({
+                type: 'COUNTRY_DETAIL',
+                payload:json.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}

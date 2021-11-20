@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { NavBar } from "./NavBar";
+import { NavBar } from "../NavBar/NavBar";
 
 
 export default function CreateActivity(){
@@ -45,6 +45,8 @@ export default function CreateActivity(){
             errors.duration = 'Duration is required'
         } else if (!parseInt(input.duration)){
             errors.duration = 'Duration must be a number'
+        } else if (input.duration.length > 3) {
+            errors.duration = 'Duration cannot be that long!'
         }
         if (!input.season){
             errors.season = 'Season is required'
