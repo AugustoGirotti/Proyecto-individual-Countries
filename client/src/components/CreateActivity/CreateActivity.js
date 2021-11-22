@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import './CreateActivity.css'
 import axios from 'axios'
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { NavBar } from "../NavBar/NavBar";
-
+import style from './CreateActivity.module.css'
 
 export default function CreateActivity(){
     const [input, setInput] = useState({
@@ -53,7 +52,7 @@ export default function CreateActivity(){
         } else if(!seasons.includes(input.season.toLowerCase())) {
             errors.season = 'Not a valid season'
         }
-        if(!input.country){
+        if(input.country.length === 0){
             errors.country = 'Country is required'
         }
         return errors
@@ -70,12 +69,14 @@ export default function CreateActivity(){
     }
 
     function handleSelect(e){
-        if (!input.country.includes(e.target.value)){
+        if (!input.country.includes(e.target.value) && e.target.value !== 'empty'){
             setInput({
                 ...input,
                 country: [...input.country, e.target.value]
             })
         }
+        let errors = validate({...input, country: [...input.country, e.target.value]})
+        setErrors(errors)
     }
 
     function deleteCountry(e){
@@ -85,6 +86,8 @@ export default function CreateActivity(){
             ...input,
             country: newCountries
         })
+        let errors = validate({...input, country: newCountries})
+        setErrors(errors)
     }
 
     async function handleSubmit(e){
@@ -104,75 +107,76 @@ export default function CreateActivity(){
     return (
         <>
         <NavBar />
-        <form>
-            <div>
-                <Link to='/home'>
-                    <button>Volver</button>
-                </Link>
-            </div>
-            <div>
-                <label>Name:</label>
+        <form className={style.container}>
+            <div className={style.content}>
+                <label className={style.text}>Name:</label>
                 <input name='name'
                 value={input.name}
                 onChange={handleInputChange}
-                className={errors.name && 'danger'}
+                className={errors.name && style.danger}
                 />
                 {
-                    errors.name && (<p className='danger'>{errors.name}</p>)
+                    errors.name && (<p className={style.danger}>{errors.name}</p>)
                 }
             </div>
-            <div>
-                <label>Difficulty:</label>
+            <div className={style.content}>
+                <label className={style.text}>Difficulty:</label>
                 <input name='difficulty'
                 value={input.difficulty}
                 onChange={handleInputChange}
-                className={errors.difficulty && 'danger'}
+                className={errors.difficulty && style.danger}
                 />
                 {
-                    errors.difficulty && (<p className='danger'>{errors.difficulty}</p>)
+                    errors.difficulty && (<p className={style.danger}>{errors.difficulty}</p>)
                 }
             </div>
-            <div>
-                <label>{'Duration (in hours):'}</label>
+            <div className={style.content}>
+                <label className={style.text}>{'Duration (in hours):'}</label>
                 <input name='duration'
                 value={input.duration}
                 onChange={handleInputChange}
-                className={errors.duration && 'danger'}
+                className={errors.duration && style.danger}
                 />
                 {
-                    errors.duration && (<p className='danger'>{errors.duration}</p>)
+                    errors.duration && (<p className={style.danger}>{errors.duration}</p>)
                 }
             </div>
-            <div>
-                <label>Season:</label>
+            <div className={style.content}>
+                <label className={style.text}>Season:</label>
                 <input name='season'
                 value={input.season}
                 onChange={handleInputChange}
                 className={errors.season && 'danger'}
                 />
                 {
-                    errors.season && (<p className='danger'>{errors.season}</p>)
+                    errors.season && (<p className={style.danger}>{errors.season}</p>)
                 }
             </div>
-            <p>Select countries:</p>
-            <select onChange={handleSelect}>
+            <div className={style.selectContainer}>
+                <p className={style.text}>Select countries:</p>
+                <select onChange={handleSelect}>
+                    <option value='empty'>-Select-</option>
+                    {
+                        allCountries.map(c => (
+                            <option value={c.name} key={c.id}>{c.name}</option>
+                        ))
+                    }
+                </select>
                 {
-                    allCountries.map(c => (
-                        <option value={c.name} key={c.id}>{c.name}</option>
-                    ))
+                    errors.country && (<p className={style.danger}>{errors.country}</p>)
                 }
-            </select>
                 {
                     input.country.map((c,i) => {
                         return (
-                            <div key={i}>
-                                <button value={c} onClick={deleteCountry}>X</button>
+                            <div key={i} className={style.countryOption}>
                                 <p key={c}>{c}</p>
+                                <button value={c} onClick={deleteCountry} className={style.deleteBtn}>X</button>
                             </div>
                         )
                     })
                 }
-            <button 
+            </div>
+            <button className={style.button}
             onClick={(e) => handleSubmit(e)} 
             disabled={(errors.name || errors.difficulty || errors.duration || errors.season || errors.country || !input.name) ? true : false}>Submit</button>
         </form>

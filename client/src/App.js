@@ -11,7 +11,7 @@ import CountryDetail from './components/CountryDetail/CountryDetail';
 import CreateActivity from './components/CreateActivity/CreateActivity';
 
 
-function App() {
+export function App() {
   // const [countries, setCountries] = useState([])
   // const [loading, setLoading] = useState(false)
 
@@ -33,7 +33,7 @@ function App() {
         <Route path='/home' component={Home}/>
         <Route path='/countries/:id' component={CountryDetail} />
         <Route path='/activity' component={CreateActivity} />
-        <Route path='/navbar' component={NavBar} />
+        {/* <Route path='/navbar' component={NavBar} /> */}
       </Switch>
     // </div>
 

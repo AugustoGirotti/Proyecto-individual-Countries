@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { countryDetail } from "../../actions";
 import { NavBar } from "../NavBar/NavBar";
-
+import style from './CountryDetail.module.css'
 
 export default function CountryDetail(){
     const dispatch = useDispatch() 
@@ -23,27 +23,32 @@ export default function CountryDetail(){
 
     // const {image, name, continent, capital, subregion, area, population, activities } = country
     return(
-        <div>
-            <NavBar/>
-            <img src={country.image} className='img'/>
-            <h1>{country.name}</h1>
-            <p>{country.continent}</p>
-            <p>{country.id}</p>
-            <p>{country.capital}</p>
-            <p>{country.subregion}</p>
-            <p>{country.area + 'km2'}</p>
-            <p>{country.population}</p>
-            <div>
-                <h1>Activities:</h1>
+        <>
+        <NavBar/>
+        <div className={style.container}>
+            <div className={style.country}>
+                <img src={country.image} className={style.img}/>
+                <div className={style.info}>
+                    <h2>Name: {country.name}</h2>
+                    <p>Continent: {country.continent}</p>
+                    <p>Id: {country.id}</p>
+                    <p>Capital: {country.capital}</p>
+                    <p>Subregion: {country.subregion}</p>
+                    <p>Area: {country.area + 'km2'}</p>
+                    <p>Population: {country.population}</p>
+                </div>
+            </div>
+            <h2 className={style.title}>Activities:</h2>
+            <div className={style.activities}>
                 {
                     country.activities === undefined || country.activities.length === 0 ?
                     <h4>No activity</h4> :
                     country.activities.map(a => {
                         return (
                             <div key={a.id}>
-                                <h2>{a.name}</h2>
+                                <h3>{a.name}</h3>
                                 <p>{'Difficulty: ' + a.difficulty}</p>
-                                <p>{'Duration: ' + a.duration}</p>
+                                <p>{'Duration: ' + a.duration + ' hours'}</p>
                                 <p>{'Season: ' + a.season}</p>
                             </div>
                         )
@@ -51,5 +56,6 @@ export default function CountryDetail(){
                 }
             </div>
         </div>
+        </>
     )
 }

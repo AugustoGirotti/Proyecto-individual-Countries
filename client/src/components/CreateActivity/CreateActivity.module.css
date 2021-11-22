@@ -1,0 +1,85 @@
+
+
+p.danger {
+    color: red;
+    font-size: 10px;
+  }
+  
+input.danger {
+    border: 2px solid red;
+  }
+
+.block{
+    cursor: not-allowed;
+    background-color: rgb(153, 153, 153) !important;
+    pointer-events:none;
+}
+
+.text{
+  font-weight: bolder;
+}
+
+.content{
+  height: 90px;
+  margin-left: 10px;
+}
+
+.selectContainer{
+  margin-left: 10px;
+}
+
+.countryOption{
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  align-items: center;
+  font-weight: bold;
+}
+
+.deleteBtn{
+  height: 20px;
+  margin-left: 5px;
+  background-color: #060b26;
+  border-radius: 5px;
+  color:aliceblue;
+  cursor: pointer;
+  border: none;
+}
+
+.deleteBtn:hover{
+  background-color: #1a83ff;
+}
+
+.selectContainer select{
+  background-color: #060b26;
+  color: aliceblue;
+  cursor: pointer;
+  height: 25px;
+  border-radius: 10px;
+  border: none;
+
+}
+
+.button{
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  background-color: #060b26;
+  border-radius: 10px;
+  height: 20px;
+  width: 80px;
+  font-size: 14px;
+  color:aliceblue;
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover{
+  background-color: #1a83ff;
+}
+
+.container{
+  background-image: url('../LandingPage/bglanding.jpg');
+  background-size: cover;
+  height: 100vh;
+}

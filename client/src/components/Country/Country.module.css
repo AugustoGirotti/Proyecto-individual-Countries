@@ -24,12 +24,15 @@
     font-weight: 400;
 }
 
-.card a{
+.getInfo{
     font-weight: 500;
     text-decoration: none;
     color: rgb(79, 56, 122);
 }
 
+.link{
+    text-decoration: none;
+}
  
 .card{
     width: 330px;

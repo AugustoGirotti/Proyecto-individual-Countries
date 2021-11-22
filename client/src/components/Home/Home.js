@@ -45,7 +45,9 @@ export default function Home(){
 
     return (
         <>
-            <NavBar />
+        <NavBar />
+        <div className={style.container}>
+            
             <div className={style.buttons}>
                 <Link to='/activity'>
                     <button className={style.btn}>Create activity</button>
@@ -82,6 +84,7 @@ export default function Home(){
                 </select>
             </div>
             <Pagination countries={countries}/>
+        </div>
         </>
     )
 

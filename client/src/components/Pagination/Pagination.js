@@ -41,6 +41,16 @@ export default function Pagination({countries}){
     const data = countries
     const dispatch = useDispatch()
 
+
+    useEffect(() => {
+        if (currentPage === 1){
+            setitemsPerPage(9)
+        } else {
+            setitemsPerPage(10)
+        }
+    },[currentPage])
+
+    
     useEffect(() => {
         setCurrentPage(1)
         setMaxPageNumberLimit(5)
@@ -102,7 +112,7 @@ export default function Pagination({countries}){
 
     return(
         <div className={style.container}>
-            {renderData(currentItems)}
+            
             <ul className={style.pageNumbers}>
                 <li>
                     <button 
@@ -122,6 +132,7 @@ export default function Pagination({countries}){
                     </button>
                 </li>
             </ul>
+            {renderData(currentItems)}
         </div>
     )
 }

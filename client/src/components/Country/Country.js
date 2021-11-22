@@ -7,8 +7,8 @@ export function Country({name, id, image, continent, capital, subregion, area, p
             <img src={image} className={style.img}/>
             <h3 className={style.name}>{name}</h3>
             <p>{continent}</p>
-            <Link to={`/countries/${id}`} >
-                <a>Get info</a>
+            <Link to={`/countries/${id}`} className={style.link}>
+                <p className={style.getInfo}>Get info</p>
             </Link>
         </div>
     )

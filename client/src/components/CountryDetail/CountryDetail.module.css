@@ -1,0 +1,61 @@
+.img{
+    height: 200px;
+    width: 300px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+
+}
+
+.info p{
+    margin: 5px;
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.info h2{
+    margin: 5px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    background-image: url('../LandingPage/bglanding.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    /* position: absolute; */
+}
+
+.title{
+    margin-top: 100px;
+}
+
+.activities{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    
+}
+
+.activities p{
+    margin: 5px;
+    font-weight: bolder;
+}
+
+.activities h3{
+    margin: 5px;
+}
+    
+
+
+.country{
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+    
+}

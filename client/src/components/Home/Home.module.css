@@ -1,7 +1,7 @@
 .btn{
     background-color: #060b26;
     border-radius: 10px;
-    height: 70%;
+    height: 35px;
     width: 80px;
     font-size: 14px;
     color:aliceblue;
@@ -12,7 +12,7 @@
     background-color: #1a83ff;
 }
 .buttons{
-    height: 50%;
+    height: 50px;
     background-color: rgb(79, 56, 122);
     justify-content: space-around;
     display: flex;
@@ -26,7 +26,7 @@
     background-color: #060b26;
     color: aliceblue;
     cursor: pointer;
-    height: 70%;
+    height: 32px;
     border-radius: 10px;
     border: none;
 }
@@ -37,3 +37,8 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: black;
 }
+
+/* .container{
+    display: flex;
+    flex-direction: column;
+} */
