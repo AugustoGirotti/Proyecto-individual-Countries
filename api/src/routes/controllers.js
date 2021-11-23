@@ -4,10 +4,9 @@ const {Op} = require('sequelize')
 
 async function createActivity(req, res){
     try{
-        const {id, name, difficulty, duration, season, country } = req.body
-
-        const newActivity = await Activity.create({  //findOrCreate
-            // id,
+        const {name, difficulty, duration, season, country } = req.body
+        //id??
+        const newActivity = await Activity.create({  
             name,
             difficulty,
             duration,
@@ -32,29 +31,8 @@ async function createActivity(req, res){
     }
 }
 
-// async function copyCountries(){
-//     let countries = await Country.findAll()
-//     if(countries.length === 0){
-//         const countries = await axios.get('https://restcountries.com/v3/all')
-//         let array = []
-//         for (let i = 0; i < countries.data.length; i++){
-//             array.push({
-//                 name: countries.data[i].name.common,
-//                 id: countries.data[i].cca3,
-//                 image:countries.data[i].flags[0],
-//                 continent:countries.data[i].region,
-//                 // capital: countries.data[i].capital ? countries.data[i].capital[0] : 'Capital not found',
-//                 subregion: countries.data[i].subregion,
-//                 area: countries.data[i].area,
-//                 population:countries.data[i].population 
-//             })
-//         }
-//         await Country.bulkCreate(array)
-//     }
-//   }
 
 async function getCountries(req, res){
-    // await copyCountries()
     if (Object.keys(req.query).length > 0 && !req.query.name){
         return res.json({message: 'Error'})
     }

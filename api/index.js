@@ -21,7 +21,7 @@ async function copyCountries(){
               image:countries.data[i].flags[0],
               continent:countries.data[i].region,
               capital: countries.data[i].capital ? countries.data[i].capital[0] : 'Capital not found',
-              subregion: countries.data[i].subregion,
+              subregion: countries.data[i].subregion ? countries.data[i].subregion : 'Not found',
               area: countries.data[i].area,
               population:countries.data[i].population 
           })
