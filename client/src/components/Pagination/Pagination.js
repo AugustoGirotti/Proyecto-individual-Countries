@@ -1,16 +1,15 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { Country } from "../Country/Country";
 import style from './Pagination.module.css'
-import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../../actions";
+import { useDispatch } from "react-redux";
+
 
 const renderData = data => {
     return(
         <ul className={style.countries}>
             {data === undefined || data.length === 0 ? <p>Country not found</p> :
                 data.map((country, index)=>{
-                    // return <li key={index} >{country.name}</li>
                     return <Country 
                     key={index}
                     name={country.name}
@@ -29,7 +28,6 @@ const renderData = data => {
 }
 
 export default function Pagination({countries}){
-    // const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setitemsPerPage] = useState(10);
 
@@ -42,13 +40,13 @@ export default function Pagination({countries}){
     const dispatch = useDispatch()
 
 
-    useEffect(() => {
-        if (currentPage === 1){
-            setitemsPerPage(9)
-        } else {
-            setitemsPerPage(10)
-        }
-    },[currentPage])
+    // useEffect(() => {
+    //     if (currentPage === 1){
+    //         setitemsPerPage(9)
+    //     } else {
+    //         setitemsPerPage(10)
+    //     }
+    // },[currentPage])
 
     
     useEffect(() => {
@@ -86,11 +84,6 @@ export default function Pagination({countries}){
         } else return null;
     })
 
-    // useEffect(()=>{
-    //     axios.get('http://localhost:3001/countries')
-    //     .then(r => setData(r.data))
-    // },[])
-    // console.log(data)
 
 
     const handleNextButton = () => {
