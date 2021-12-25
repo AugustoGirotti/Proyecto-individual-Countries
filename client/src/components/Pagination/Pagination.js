@@ -7,10 +7,11 @@ import { useDispatch } from "react-redux";
 
 const renderData = data => {
     return(
-        <ul className={style.countries}>
-            {data === undefined || data.length === 0 ? <p>Country not found</p> :
+        <div className={style.countries}>
+            {data === undefined || data.length === 0 ? <p className={style.notFound}>Country not found</p> :
                 data.map((country, index)=>{
-                    return <Country 
+                    return <Country
+                    className={style.country} 
                     key={index}
                     name={country.name}
                     id={country.id}
@@ -23,7 +24,7 @@ const renderData = data => {
                     />
                 })  
             }
-        </ul>
+        </div>
     )
 }
 
@@ -34,8 +35,7 @@ export default function Pagination({countries}){
     const [pageNumberLimit, setPageNumberLimit] = useState(5)
     const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5)
     const [minPageNumberLimit, setMinPageNumberLimit] = useState(0)
-    //defino la cantidad de paginas que voy a necesitar dividiendo el largo del arreglo de paises
-    //por la cantidad de paises por pagina
+
     const data = countries
     const dispatch = useDispatch()
 
@@ -59,6 +59,8 @@ export default function Pagination({countries}){
         setCurrentPage(Number(event.target.id))
     }
 
+    //defino la cantidad de paginas que voy a necesitar dividiendo el largo del arreglo de paises
+    //por la cantidad de paises por pagina
     const pages = [];
     for (let i = 0; i < Math.ceil(data.length/itemsPerPage); i++){
         pages.push(i + 1);
@@ -106,7 +108,7 @@ export default function Pagination({countries}){
     return(
         <div className={style.container}>
             
-            <ul className={style.pageNumbers}>
+            <ul className={data === undefined || data.length === 0 ? style.none : style.pageNumbers}>
                 <li>
                     <button 
                     onClick={handlePrevButton}

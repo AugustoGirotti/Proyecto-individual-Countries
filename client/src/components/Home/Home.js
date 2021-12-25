@@ -1,4 +1,4 @@
-import { filterByActivity, filterByContinent, getCountries, orderByAlph, orderByPop } from "../../actions";
+import { filterByActivity, filterByContinent, getCountries, orderByAlph, orderByPop, getActivities } from "../../actions";
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux'
@@ -11,12 +11,14 @@ export default function Home(){
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries)
     const allCountries = useSelector(state => state.allCountries)
-    // const activities = useSelector(state => state.activities)
+    const activities = useSelector(state => state.activities)
+
+    // console.log(activities)
 
     useEffect(()=>{
         dispatch(getCountries())
+        dispatch(getActivities())
     }, [])
-
 
     const [order, setOrder] = useState('')
 
@@ -75,12 +77,10 @@ export default function Home(){
                 <select onChange={handleFilterByActivity} className={style.filter}>
                     <option value='empty'>-FilterByActivity-</option>
                     {
-                        allCountries.map(c => (
-                            c.activities.map(a => (
-                                <option value={a.name} key={a.name}>{a.name}</option>
-                                ))
-                                ))
-                            }
+                        activities.map((a, i) => (
+                            <option value={a.name} key={i}>{a.name}</option>
+                        ))
+                    }
                 </select>
             </div>
             <Pagination countries={countries}/>

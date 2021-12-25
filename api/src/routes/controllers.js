@@ -3,8 +3,11 @@ const axios = require('axios')
 const {Op} = require('sequelize')
 
 async function createActivity(req, res){
+    console.log(req.body)
+    const {name, difficulty, duration, season, country } = req.body
+    
     try{
-        const {name, difficulty, duration, season, country } = req.body
+        console.log(country)
         //id??
         const newActivity = await Activity.create({  
             name,
@@ -13,17 +16,19 @@ async function createActivity(req, res){
             season
         })
 
-        const countryDb = await Country.findOne({
+        const countryDb = await Country.findAll({
             where:{
                 name: {
-                    [Op.iLike]: `%${country}%`
+                    [Op.in]: country
                 }
             }
         })
+        console.log(countryDb)
+        for (let i = 0; i < countryDb.length; i++){
+            countryDb[i].addActivity(newActivity)
+        }
 
-        countryDb.addActivity(newActivity)
-
-        res.send(`Activity created in ${countryDb.name}`)
+        res.send(`Activity created in countries ${country.map((c)=>c)}`)
 
     } catch(e) {
         console.log(e)
@@ -82,8 +87,14 @@ async function getCountryById(req, res){
 }
 
 
+async function getActivities(req, res){
+    const activities = await Activity.findAll()
+    return res.json(activities)
+}
+
 module.exports = {
     createActivity,
     getCountries,
     getCountryById,
+    getActivities
 }

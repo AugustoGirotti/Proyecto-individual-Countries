@@ -1,11 +1,31 @@
 import React, { useState } from "react";
 import axios from 'axios'
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { NavBar } from "../NavBar/NavBar";
 import style from './CreateActivity.module.css'
+import styled from "styled-components";
 
+const StyledForm = styled.form`
+  background-size: cover;
+  height: 100vh;
+  background-color: aliceblue;
+`
+const Content = styled.div`
+  height: 90px;
+  margin-left: 10px;
+`
+const Select = styled.div`
+  margin-left: 10px;
+  & select{
+    background-color: #060b26;
+    color: aliceblue;
+    cursor: pointer;
+    height: 25px;
+    border-radius: 10px;
+    border: none;
+  }
+`
+ 
 export default function CreateActivity(){
     const [input, setInput] = useState({
         name: '',
@@ -14,8 +34,6 @@ export default function CreateActivity(){
         season: '',
         country:[]
     })
-
-
 
     const allCountries = useSelector(state => state.allCountries)
 
@@ -58,7 +76,6 @@ export default function CreateActivity(){
         return errors
     }
 
-
     function handleInputChange(event){
         setInput({
             ...input,
@@ -92,10 +109,12 @@ export default function CreateActivity(){
 
     async function handleSubmit(e){
         e.preventDefault()
-        for (let i = 0; i< input.country.length; i++){
-            var response = await axios.post('http://localhost:3001/activity', {...input, country: input.country[i]})
-            alert(response.data)
-        }
+        // for (let i = 0; i< input.country.length; i++){
+        //     var response = await axios.post('http://localhost:3001/activity', {...input, country: input.country[i]})
+        //     alert(response.data)
+        // }
+        var response = await axios.post('http://localhost:3001/activity', input)
+        alert(response.data)
         setInput({
             name: '',
             difficulty: '',
@@ -104,11 +123,12 @@ export default function CreateActivity(){
             country:[]
         })
     }
+
     return (
         <>
         <NavBar />
-        <form className={style.container}>
-            <div className={style.content}>
+        <StyledForm>
+            <Content>
                 <label className={style.text}>Name:</label>
                 <input name='name'
                 value={input.name}
@@ -118,8 +138,8 @@ export default function CreateActivity(){
                 {
                     errors.name && (<p className={style.danger}>{errors.name}</p>)
                 }
-            </div>
-            <div className={style.content}>
+            </Content>
+            <Content>
                 <label className={style.text}>Difficulty:</label>
                 <input name='difficulty'
                 value={input.difficulty}
@@ -129,8 +149,8 @@ export default function CreateActivity(){
                 {
                     errors.difficulty && (<p className={style.danger}>{errors.difficulty}</p>)
                 }
-            </div>
-            <div className={style.content}>
+            </Content>
+            <Content>
                 <label className={style.text}>{'Duration (in hours):'}</label>
                 <input name='duration'
                 value={input.duration}
@@ -140,8 +160,8 @@ export default function CreateActivity(){
                 {
                     errors.duration && (<p className={style.danger}>{errors.duration}</p>)
                 }
-            </div>
-            <div className={style.content}>
+            </Content>
+            <Content>
                 <label className={style.text}>Season:</label>
                 <input name='season'
                 value={input.season}
@@ -151,8 +171,8 @@ export default function CreateActivity(){
                 {
                     errors.season && (<p className={style.danger}>{errors.season}</p>)
                 }
-            </div>
-            <div className={style.selectContainer}>
+            </Content>
+            <Select>
                 <p className={style.text}>Select countries:</p>
                 <select onChange={handleSelect}>
                     <option value='empty'>-Select-</option>
@@ -175,11 +195,11 @@ export default function CreateActivity(){
                         )
                     })
                 }
-            </div>
+            </Select>
             <button className={style.button}
             onClick={(e) => handleSubmit(e)} 
             disabled={(errors.name || errors.difficulty || errors.duration || errors.season || errors.country || !input.name) ? true : false}>Submit</button>
-        </form>
+        </StyledForm>
         </>
     )
 }
