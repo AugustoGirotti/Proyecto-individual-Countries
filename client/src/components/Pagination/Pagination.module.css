@@ -1,108 +1,112 @@
 .container {
-    /* width: 100%;
+  /* width: 100%;
     max-width: 1200px;
     height: 430px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: auto; */
-    background-color: aliceblue;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: "number number number"
-                        "countries countries countries";
+  background-color: aliceblue;
+  min-height: 100vh;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "number number number"
+    "countries countries countries";
 }
 
-.none{
-    display: none;
+.none {
+  display: none;
 }
 
-.pageNumbers{
-    list-style: none;
-    display:flex;
-    justify-content: center;
-    margin-top: 20px;
-    grid-area: number;
+.pageNumbers {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  grid-area: number;
+  height: 50px;
 }
 
-.pageNumbers li{
-    padding: 10px;
-    border: solid black;
-    cursor: pointer;
+.pageNumbers li {
+  padding: 10px;
+  border: solid black;
+  cursor: pointer;
 }
 /* .pageNumbers li:hover{
     background-color: black;
     color: white;
 } */
 
-.active{
-    background-color: black;
-    color: white;
+.active {
+  background-color: black;
+  color: white;
 }
 
-.pageNumbers li button{
-    background-color: transparent;
-    border: none;
-    font-size: 110%;
-    cursor: pointer;
+.pageNumbers li button {
+  background-color: transparent;
+  border: none;
+  font-size: 110%;
+  cursor: pointer;
 }
 
-.pageNumbers li button:hover{
-    background-color: black;
-    color: white;
+.pageNumbers li button:hover {
+  background-color: black;
+  color: white;
 }
 
-.countries{
-    display: grid;
-    justify-self: center;
-    grid-template-columns: repeat(4, 1fr);
-    grid-area: countries;
-    grid-template-areas: "country country country";
+.countries {
+  display: grid;
+  justify-self: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-area: countries;
+  grid-template-areas: "country country country";
 }
 
-.country{
-    grid-area: country;
+.country {
+  grid-area: country;
 }
 
-.notFound{
-    font-size: larger;
-    font-weight: 500;
-    position: absolute;
-    justify-self: center;
+.notFound {
+  font-size: larger;
+  font-weight: 500;
+  position: absolute;
+  justify-self: center;
 }
 
-@media screen and (max-width: 1500px){
-    /* .container{
+@media screen and (max-width: 1500px) {
+  /* .container{
         grid-template-columns: repeat(3, 1fr);
         grid-template-areas: "number number number"
                             "countries countries countries";
     } */
-    .countries {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-areas: "country country country";
-    }
+  .countries {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "country country country";
+  }
 }
 
-@media screen and (max-width: 1100px){
-    /* .container{
+@media screen and (max-width: 1100px) {
+  /* .container{
         grid-template-columns: repeat(2, 1fr);
         grid-template-areas: "number number"
                             "countries countries";
     } */
-    .countries {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "country country";
-    }
+  .countries {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "country country";
+  }
 }
 
-@media screen and (max-width: 750px){
-    /* .container{
+@media screen and (max-width: 750px) {
+  /* .container{
         grid-template-columns: 1fr;
         grid-template-areas: "number"
                             "countries";
     } */
-    .countries {
-        grid-template-columns: 1fr;
-        grid-template-areas: "country";
-    }
+  .countries {
+    grid-template-columns: 1fr;
+    grid-template-areas: "country";
+  }
 }

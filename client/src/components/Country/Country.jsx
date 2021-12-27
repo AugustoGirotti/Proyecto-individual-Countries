@@ -12,6 +12,7 @@ const Card = styled.div`
   margin: 20px;
   text-align: center;
   transition: all 0.25;
+  background-color: #cddfee;
   &:hover {
     transform: translateY(-15px);
     box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);

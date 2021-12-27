@@ -21,7 +21,7 @@ export function NavBar() {
           <FaIcons.FaBars onClick={showSidebar} />
         </Link>
         <h1>Countries</h1>
-        <SearchBar />
+        {/* <SearchBar /> */}
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu-items" onClick={showSidebar}>

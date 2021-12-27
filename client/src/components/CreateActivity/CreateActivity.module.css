@@ -1,34 +1,33 @@
-
-
 p.danger {
-    color: red;
-    font-size: 15px;
-  }
-  
+  color: red;
+  font-size: 15px;
+}
+
 input.danger {
-    border: 2px solid red;
-  }
-
-.block{
-    cursor: not-allowed;
-    background-color: rgb(153, 153, 153) !important;
-    pointer-events:none;
+  border: 2px solid red;
 }
 
-.text{
+.block {
+  cursor: not-allowed;
+  background-color: rgb(153, 153, 153) !important;
+  pointer-events: none;
+}
+
+.text {
   font-weight: bolder;
+  font-size: 20px;
 }
 
-.content{
+.content {
   height: 90px;
   margin-left: 10px;
 }
 
-.selectContainer{
+.selectContainer {
   margin-left: 10px;
 }
 
-.countryOption{
+.countryOption {
   display: flex;
   flex-direction: row;
   height: 40px;
@@ -36,50 +35,53 @@ input.danger {
   font-weight: bold;
 }
 
-.deleteBtn{
+.deleteBtn {
   height: 20px;
   margin-left: 5px;
   background-color: #060b26;
   border-radius: 5px;
-  color:aliceblue;
+  color: aliceblue;
   cursor: pointer;
   border: none;
 }
 
-.deleteBtn:hover{
+.deleteBtn:hover {
   background-color: #1a83ff;
 }
 
-.selectContainer select{
+.selectContainer select {
   background-color: #060b26;
   color: aliceblue;
   cursor: pointer;
-  height: 25px;
+  height: 23px;
   border-radius: 10px;
   border: none;
-
 }
 
-.button{
+.button {
   margin-top: 10px;
   margin-left: 10px;
   border-radius: 5px;
   background-color: #060b26;
   border-radius: 10px;
-  height: 20px;
+  height: 25px;
   width: 80px;
   font-size: 14px;
-  color:aliceblue;
+  color: aliceblue;
   cursor: pointer;
   border: none;
 }
+.button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(153, 153, 153) !important;
+}
 
-.button:hover{
+.button:hover {
   background-color: #1a83ff;
 }
 
-.container{
-  background-image: url('../LandingPage/bglanding.jpg');
+.container {
+  background-image: url("../LandingPage/bglanding.jpg");
   background-size: cover;
   height: 100vh;
 }
